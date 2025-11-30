@@ -30,15 +30,14 @@
         <div class="hero-content">
             <h1>Hi, I'm Novi Aulia Agustin</h1>
             <p class="username">@novilgstn</p>
-            <p class="bio">Content Creator | Lifestyle, Beauty & Daily Vlog</p>
-            <p class="location"><i class="fas fa-map-marker-alt"></i> Pamekasan - Surabaya</p>
+            <h3 class="typing-text">I am a <span class="typewriter"></span></h3>
+            <p class="bio">Based in Pamekasan - Surabaya</p>
             <a href="#contact" class="btn">Let's Collaborate</a>
         </div>
         <div class="hero-image">
             <img src="img/WhatsApp Image 2025-11-25 at 17.34.43_32a35d05.jpg" alt="Novi Aulia Agustin">
         </div>
     </section>
-
 <section id="stats" class="stats">
         <h2>Analytics Overview</h2>
         
@@ -346,6 +345,9 @@
                 <a href="mailto:noviauliaagustin19@gmail.com">noviauliaagustin19@gmail.com</a>
             </div>
         </div>
+        <a href="https://wa.me/6281249554812?text=Halo%20Kak%20Novi,%20saya%20mau%20tanya%20pricelist" target="_blank" class="float-wa">
+        <i class="fab fa-whatsapp"></i>
+    </a>
         <footer>
             <p>&copy; 2025 Novi Aulia Agustin. All Rights Reserved.</p>
         </footer>
@@ -449,6 +451,39 @@
                 alert("Gagal menyalin otomatis. Silakan salin manual.");
             });
         }
+
+        // --- 5. Logic Typewriter Effect ---
+        const textElement = document.querySelector('.typewriter');
+        const words = ["Content Creator", "Beauty Enthusiast", "TikTok Influencer", "Brand Partner"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); // Tunggu 2 detik sebelum hapus
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500); // Tunggu sebentar sebelum ngetik kata baru
+            } else {
+                setTimeout(type, isDeleting ? 100 : 200); // Kecepatan ngetik
+            }
+        }
+        
+        // Jalankan efek ngetik jika elemen ada
+        if(textElement) type();
     </script>
 </body>
 </html>
